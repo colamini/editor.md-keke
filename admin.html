@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>md编辑器后台编辑页</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/editormd.css" />
+</head>
+<body>
+    <div id="layout">
+        <header>
+        </header>
+
+        <div class="editormd" id="test-editormd">   
+            <textarea></textarea>             
+
+        </div>
+        <br/><input id="submit" type="button" name="submit" value="Submit" class="btn" style="margin-left: 5%;" />
+        <button id="preview-btn">Preview HTML (Press Shift + ESC cancel)</button>
+    </div>        
+    <script src="js/zepto.min.js"></script>
+    <script src="../editormd.js"></script>   
+    <script type="text/javascript">
+       var testEditor;
+			var jQuery = Zepto;  // 为了避免修改 flowChart.js 和 sequence-diagram.js 的源码，所以想支持 flowChart / sequenceDiagram 就得加上这一句
+
+           window.onload = function() {
+
+            testEditor = editormd("test-editormd", {
+                width: "90%",
+                height: 740,
+                path : '../lib/',
+                theme : "default",
+                previewTheme : "default",
+                editorTheme : "base16-light",
+                codeFold : true,
+                        //syncScrolling : false,
+                        saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+                        searchReplace : true,
+                        //watch : false,                // 关闭实时预览
+                        htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启    
+                        //toolbar  : false,             //关闭工具栏
+                        //previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
+                        emoji : true,
+                        taskList : true,
+                        tocm            : true,         // Using [TOCM]
+                        tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+                        flowChart : true,             // 开启流程图支持，默认关闭
+                        sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+                        //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+                        //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+                        //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+                        //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+                        //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+                        imageUpload : true,
+                        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                        imageUploadURL : "./php/upload.php",
+                        onload : function() {
+                            console.log('onload', this);
+                            
+                            //this.fullscreen();
+                            //this.unwatch();
+                            //this.watch().fullscreen();
+
+                            //this.setMarkdown("#PHP");
+                            //this.width("100%");
+                            //this.height(480);
+                            //this.resize("100%", 640);
+                        }
+                    });
+
+            document.getElementById("submit").onclick = function(){
+                let htmlCode = document.getElementsByClassName("editormd-preview-container")[0].innerHTML;
+                let mdCode = testEditor.getMarkdown();
+                console.log(htmlCode);
+            }
+
+
+            document.getElementById("preview-btn").onclick = function(){
+                testEditor.previewing();
+            }
+
+            //模拟用户从数据库拿到md源代码，可以修改文章
+            document.getElementsByTagName('textarea')[0].innerHTML = "##HELLO keke";
+
+
+
+
+        };
+    </script>
+</body>
+</html>
