@@ -3,7 +3,8 @@
 标签（空格分隔）： editor.md 富文本编辑器
 
 ---
-[toc]
+原文链接：https://www.zybuluo.com/kexinWeb/note/662383
+[TOC]
 
 ##写在前面
 当后台需要插入富文本编辑器的时候，editor.md是一个不错的选择，它是一款开源的md编辑器，编写简单，风格简洁美观，非常适合编写技术文档。
@@ -163,6 +164,7 @@ editor.md的基本配置项以及可以使用的函数：
 b.用浏览器打开use-zepto.html文件（由于full.html在非php环境中打开会出错，原因在于 `$.get('test.md', function(md){});`
 
 在左边的编辑器里面编辑：(注意：要有TOC还有代码高亮区！）
+
 ![此处输入图片的描述][3]
 
 然后点击`Get Html`按钮，仔细观察alert内容（建议把alert改为console.log，方便对比）
